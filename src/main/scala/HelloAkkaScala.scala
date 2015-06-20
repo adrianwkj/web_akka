@@ -1,5 +1,7 @@
 import akka.actor.{ ActorRef, ActorSystem, Props, Actor, Inbox }
 import scala.concurrent.duration._
+import org.ansj.splitWord.analysis._
+
 
 case object Greet
 case class WhoToGreet(who: String)
@@ -9,7 +11,8 @@ class Greeter extends Actor {
   var greeting = ""
 
   def receive = {
-    case WhoToGreet(who) => greeting = s"hello, $who"
+    //case WhoToGreet(who) => greeting = s"hello, $who"
+    case WhoToGreet(who) => greeting = ToAnalysis.parse(who).toString
     case Greet           => sender ! Greeting(greeting) // Send the current greeting back to the sender
   }
 }
@@ -26,7 +29,7 @@ object HelloAkkaScala extends App {
   val inbox = Inbox.create(system)
 
   // Tell the 'greeter' to change its 'greeting' message
-  greeter.tell(WhoToGreet("akka"), ActorRef.noSender)
+  greeter.tell(WhoToGreet("雀氏柔薄乐动婴儿纸尿裤L168片宝宝大码尿不湿超薄透气"), ActorRef.noSender)
 
   // Ask the 'greeter for the latest 'greeting'
   // Reply should go to the "actor-in-a-box"
@@ -44,8 +47,8 @@ object HelloAkkaScala extends App {
 
   val greetPrinter = system.actorOf(Props[GreetPrinter])
   // after zero seconds, send a Greet message every second to the greeter with a sender of the greetPrinter
-  system.scheduler.schedule(0.seconds, 1.second, greeter, Greet)(system.dispatcher, greetPrinter)
-  
+  //system.scheduler.schedule(0.seconds, 1.second, greeter, Greet)(system.dispatcher, greetPrinter)
+  system.shutdown()
 }
 
 // prints a greeting
