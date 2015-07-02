@@ -1,3 +1,4 @@
+package com.nielsen.ecom.wordseg;
 
 import akka.actor._
 import akka.routing.RoundRobinRouter
