@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
   "com.novocode" % "junit-interface" % "0.11" % "test",
   "org.scalaj" %% "scalaj-http" % "1.1.4",
   "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.3",
-  "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3"
+  "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.3",
+  "com.typesafe.akka" %% "akka-cluster" % "2.3.11"
 )
 
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-v")
